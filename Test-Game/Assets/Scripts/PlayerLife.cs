@@ -11,10 +11,20 @@ public class PlayerLife : MonoBehaviour
 
     private Animator anim;
     private Rigidbody2D player_2d;
+    bool fall = false;
     private void Start()
     {
         anim = GetComponent<Animator>();
         player_2d = GetComponent<Rigidbody2D>();
+        // player_grav = GetComponent<G>
+    }
+
+    private void Update()
+    {
+        if (fall)
+        {
+            Death();
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -23,8 +33,6 @@ public class PlayerLife : MonoBehaviour
         {
             Death();
         }
-
-
     }
     private void Death()
     {
@@ -34,6 +42,14 @@ public class PlayerLife : MonoBehaviour
 
     private void RestartLevel()
     {
+        Debug.Log("asdasd");
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
+
+    public void FallOff()
+    {
+        Debug.Log("chec");
+        fall = true;
+    }
+    // in the animation event, that is were the restartlevel function is used.
 }
